@@ -216,13 +216,15 @@
             overflow: hidden;
         }
         
+        /* O texto de fundo só aparece se a imagem não carregar */
         .card-img::after {
-            content: 'IMG PENDENTE';
+            content: 'ARQUIVO INDISPONÍVEL';
             position: absolute;
-            color: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.05);
             font-family: var(--font-title);
             letter-spacing: 3px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            text-align: center;
         }
 
         .card-img img {
@@ -352,9 +354,9 @@
         }
 
         .ficha-img-box::after {
-            content: 'FOTO DE PERFIL PENDENTE';
+            content: 'ARQUIVO INDISPONÍVEL';
             position: absolute;
-            color: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.05);
             font-family: var(--font-title);
             text-align: center;
             padding: 1rem;
@@ -545,14 +547,13 @@
     <script>
         // ==========================================
         // BANCO DE DADOS DOS PERSONAGENS (JSON)
-        // Para adicionar imagens, coloque o link no campo "img"
         // ==========================================
         const personagens = [
             {
                 id: "suguro",
                 nome: "SUGURO",
                 cargo: "Líder da Nova Prospekt",
-                img: "", 
+                img: "imagens/suguro.jpg", 
                 resumoCurto: "Líder da organização. A manifestação completa da união de Dante (corpo), Zenon (mente) e Vanica (alma).",
                 resumoCompleto: "Suguro é o líder da Nova Prospekt.\n\nSua verdadeira origem está relacionada à união de três entidades independentes: Dante, Zenon e Vanica.\n\nOriginalmente, os três representavam partes de uma única existência:\n- Dante: corpo.\n- Zenon: mente.\n- Vanica: alma.\n\nQuando unidos, formam Suguro, a manifestação completa dessa existência.\n\nSua aparência é baseada em Yhwach, mas seu nome é Suguro.\n\nSuguro representa a união das três entidades e mantém as características e capacidades delas.",
                 poderes: "Suguro possui as capacidades das três entidades reunidas:\n\nDante — Corpo\n- Manipulação muscular.\n- Capacidade de modificar e controlar os próprios músculos de maneira explosiva.\n- Manipulação da gravidade.\n- Regeneração extremamente elevada.\n- Grande capacidade destrutiva e ofensiva.\n\nZenon — Mente\n- Criação, controle e manipulação de ossos.\n- Criação de portais de diferentes formatos.\n- Utilização dos portais para movimentação e estratégias de combate.\n- Capacidade de utilizar os portais de maneira extremamente precisa e perigosa.\n- Estilo de combate pragmático e voltado para eliminar ameaças rapidamente.\n\nVanica — Alma\n- Manipulação e controle de sangue.\n- Criação de pactos e restrições.\n- Pode oferecer grandes aumentos de poder em troca de expectativa de vida.\n- Pode realizar trocas equivalentes envolvendo diferentes condições e sacrifícios.\n\nCapacidade compartilhada\n- Os três possuem regeneração.\n- Os três possuem manipulação das trevas.\n\nForma unificada\nSuguro reúne todas essas capacidades em uma única existência. Além disso, na configuração em que utiliza Susano como receptáculo, incorpora também sua poderosa manipulação das trevas.",
@@ -562,7 +563,7 @@
                 id: "dante",
                 nome: "DANTE",
                 cargo: "Entidade - O Corpo",
-                img: "",
+                img: "imagens/dante.jpg",
                 resumoCurto: "Uma das três entidades originais. Representa o corpo da existência que, unida a Zenon e Vanica, forma Suguro.",
                 resumoCompleto: "Dante é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEle representa o corpo da existência original.\n\nSua natureza está intrinsecamente ligada à força física, resistência e capacidades destrutivas. Dante é parte fundamental da manifestação completa que é Suguro.",
                 poderes: "Manipulação muscular\n- Capacidade de modificar e controlar os próprios músculos de maneira explosiva.\n\nManipulação da gravidade\n- Controle sobre a gravidade ao seu redor.\n\nRegeneração extremamente elevada\n- Capacidade de regeneração muito superior ao normal.\n\nGrande capacidade destrutiva e ofensiva\n- Poder de combate focado em dano bruto e destruição.",
@@ -572,7 +573,7 @@
                 id: "zenon",
                 nome: "ZENON",
                 cargo: "Entidade - A Mente",
-                img: "",
+                img: "imagens/zenon.jpg",
                 resumoCurto: "Uma das três entidades originais. Representa a mente da existência que, unida a Dante e Vanica, forma Suguro.",
                 resumoCompleto: "Zenon é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEle representa a mente da existência original.\n\nSua natureza está ligada ao controle, estratégia e capacidades de manipulação precisa. Zenon é parte fundamental da manifestação completa que é Suguro.",
                 poderes: "Criação, controle e manipulação de ossos\n- Capacidade de criar e controlar ossos.\n\nCriação de portais\n- Criação de portais de diferentes formatos.\n\nUtilização dos portais\n- Movimentação e estratégias de combate.\n- Uso extremamente preciso e perigoso.\n\nEstilo de combate\n- Pragmático e voltado para eliminar ameaças rapidamente.",
@@ -582,7 +583,7 @@
                 id: "vanica",
                 nome: "VANICA",
                 cargo: "Entidade - A Alma",
-                img: "",
+                img: "imagens/vanica.jpg",
                 resumoCurto: "Uma das três entidades originais. Representa a alma da existência que, unida a Dante e Zenon, forma Suguro.",
                 resumoCompleto: "Vanica é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEla representa a alma da existência original.\n\nSua natureza está ligada ao sacrifício, pactos e manipulação de energia vital. Vanica é parte fundamental da manifestação completa que é Suguro.",
                 poderes: "Manipulação e controle de sangue\n- Capacidade de manipular e controlar sangue.\n\nCriação de pactos e restrições\n- Pode criar pactos e restrições.\n\nAumento de poder\n- Pode oferecer grandes aumentos de poder em troca de expectativa de vida.\n\nTrocas equivalentes\n- Pode realizar trocas equivalentes envolvendo diferentes condições e sacrifícios.",
@@ -592,7 +593,7 @@
                 id: "david",
                 nome: "DAVID MARTÍNEZ",
                 cargo: "Vice-líder da Nova Prospekt",
-                img: "",
+                img: "imagens/david.jpg",
                 resumoCurto: "Vice-líder. Seu corpo é uma plataforma tecnológica de combate composta por nanotecnologia e biotecnologia extremamente avançadas.",
                 resumoCompleto: "David é o vice-líder da Nova Prospekt.\n\nSeu corpo é composto por nanotecnologia e biotecnologia extremamente avançadas.\n\nCada célula de seu corpo possui componentes cibernéticos, criando uma estrutura que mistura perfeitamente características humanas e mecânicas.\n\nApesar de sua natureza artificial, seu corpo pode apresentar uma aparência completamente humana.\n\nEle funciona como uma verdadeira plataforma tecnológica de combate.",
                 poderes: "Corpo nanotecnológico\n- Pode modificar a própria estrutura corporal.\n- Pode criar camadas metálicas.\n- Pode modificar órgãos e membros.\n- Pode transformar partes do corpo em armamentos.\n- Pode criar lâminas, canhões e outras estruturas ofensivas.\n\nSandevistan\n- Possui um sistema cibernético instalado na coluna.\n- Permite realizar explosões de velocidade durante curtos períodos.\n- O uso provoca grande desgaste físico.\n- Pode utilizar o Sandevistan por um turno e precisa aguardar quatro turnos para permitir a recuperação adequada do corpo.\n\nArsenal tecnológico\nPode produzir equipamentos e armamentos através do próprio corpo, incluindo:\n- Granadas.\n- Pistolas.\n- Drones.\n- Torres automáticas.\n- Metralhadoras.\n- Outros equipamentos tecnológicos.\n\nHackeamento\n- Consegue invadir e manipular dispositivos tecnológicos com relativa facilidade.",
@@ -602,7 +603,7 @@
                 id: "skar",
                 nome: "SKAR",
                 cargo: "Monarca das Feras (Selado)",
-                img: "",
+                img: "imagens/skar.jpg",
                 resumoCurto: "Irmão mais velho de Jack. Um dos integrantes originais. Atualmente selado, mas seus poderes são temidos até pelo trio.",
                 resumoCompleto: "Skar é o irmão mais velho de Jack e um dos integrantes originais da Nova Prospekt.\n\nEle possui uma mentalidade muito superior à de seu irmão e transmite uma autoridade impressionante.\n\nSua presença é tão imponente que até mesmo Dante, Zenon e Vanica questionam se ele realmente está abaixo deles.\n\nSkar é conhecido como o Monarca das Feras.\n\nAtualmente está selado.\n\nAntes de ser selado, pediu educadamente a Dante que entregasse temporariamente sua posição na organização a seu irmão mais novo, Jack.\n\nAssim, Jack ocupa seu posto enquanto Skar permanece selado.\n\nSkar está entre os personagens mais poderosos da organização, ficando abaixo apenas do trio.",
                 poderes: "1. Bestialidade\nSkar pode assumir a forma de qualquer besta que consiga imaginar. Não existe uma restrição a uma única espécie de criatura. Exemplos: Mamute, Tiranossauro Rex, Kraken, Cérbero, Dragão, Lobo de três cabeças, Urso de gelo.\nPode utilizar três modalidades:\n- Transformação completa: Pode transformar todo o corpo em uma única besta.\n- Transformação híbrida: Pode misturar características de várias bestas simultaneamente. Exemplo: 40% mamute, 20% Cérbero, 30% urso de gelo, 10% Kraken.\n- Transformação parcial: Pode transformar somente partes específicas do corpo. Exemplos: Criar asas de dragão, blindagem de rinoceronte, ferrão de escorpião.\n\n2. Manipulação do fogo\nSkar pode criar, controlar e manipular fogo. Embora seja um poder aparentemente simples, seu domínio é extremamente elevado. Sua habilidade com fogo é comparável ao domínio que Susano possui sobre as trevas.\n\n3. Garras\nSkar pode produzir cortes em formato de garras. O diferencial é que sua capacidade de corte aumenta exponencialmente conforme sua sede de sangue cresce. Se a sede diminui, o corte também diminui. O poder pode começar relativamente fraco e alcançar níveis extremamente elevados conforme o combate se desenvolve.",
@@ -612,7 +613,7 @@
                 id: "jack",
                 nome: "JACK",
                 cargo: "Substituto Temporário",
-                img: "",
+                img: "imagens/jack.jpg",
                 resumoCurto: "Irmão mais novo de Skar. Ocupa o posto temporariamente. Poderoso e perigoso, mas com capacidade intelectual muito baixa.",
                 resumoCompleto: "Jack é o irmão mais novo de Skar.\n\nEle ocupa uma posição na Nova Prospekt porque seu irmão mais velho, antes de ser selado, pediu educadamente a Dante que entregasse temporariamente seu posto a Jack.\n\nJack não conquistou originalmente aquela posição por ser o candidato mais adequado. Ele está ali porque Skar pediu.\n\nSua personalidade é muito diferente da de seu irmão. Jack possui uma capacidade intelectual e uma mentalidade muito inferiores às de Skar.\n\nÉ extremamente perigoso e poderoso, mas também pode representar um problema para a própria organização. Mesmo quando recebe explicações detalhadas, pode acabar comprometendo uma missão por não compreender adequadamente a situação.",
                 poderes: "Força física\n- Possui atributos físicos extremamente elevados.\n- Sua força e resistência são superiores às de praticamente qualquer adversário convencional.\n- É extremamente resistente.\n\nTransformação em mamute\n- Pode assumir a forma de um mamute de aproximadamente 15 metros.\n- Sua força física aumenta consideravelmente.\n- Sua resistência também é ampliada.\n- Seu tamanho e sua lentidão tornam sua movimentação ainda menos eficiente.",
@@ -622,7 +623,7 @@
                 id: "quilge",
                 nome: "QUILGE OPIE",
                 cargo: "Integrante",
-                img: "",
+                img: "imagens/quilge.jpg",
                 resumoCurto: "Indivíduo cruel e psicopático. Combina manipulação de veneno com a criação e controle de fios de energia.",
                 resumoCompleto: "Quilge é um dos integrantes da Nova Prospekt.\n\nÉ um indivíduo extremamente cruel e psicopático.\n\nSua personalidade é marcada pela ausência de culpa ou remorso. Ele é capaz de realizar atrocidades sem demonstrar qualquer arrependimento.\n\nSeu poder combina manipulação de veneno com a criação e controle de fios de energia.",
                 poderes: "Manipulação de veneno\n- Pode criar, controlar e manipular venenos.\n- Pode utilizar diferentes aplicações de veneno.\n\nFios de energia\nPode criar fios compostos de energia. Os fios possuem duas modalidades:\n- Invisíveis: mais fracos, mas difíceis de perceber.\n- Visíveis: mais resistentes e poderosos.\n\nPode utilizar os fios para:\n- Criar milhares de lâminas.\n- Construir jaulas.\n- Criar barreiras.\n- Construir estruturas.\n- Criar criaturas.\n- Prender adversários.\n- Formar grandes conjuntos de fios interligados.\n\nRegeneração dos fios\nOs fios podem ser destruídos, mas possuem a capacidade de se regenerar completamente em poucos segundos.\n\nCombinação com veneno\nO veneno pode percorrer os fios, permitindo combinar ataques e armadilhas.",
@@ -632,7 +633,7 @@
                 id: "gyokko",
                 nome: "GYOKKO",
                 cargo: "Integrante",
-                img: "",
+                img: "imagens/gyokko.jpg",
                 resumoCurto: "Anatomia grotesca e flexível. Poder baseado na manipulação de água e vasos especiais com portais e invocações.",
                 resumoCompleto: "Gyokko é um dos integrantes da Nova Prospekt.\n\nSeu poder é baseado na criação e manipulação de grandes quantidades de água, além da utilização de vasos especiais com diferentes funções.\n\nPossui uma anatomia grotesca e extremamente flexível.",
                 poderes: "Manipulação da água\n- Pode criar, controlar e manipular grandes quantidades de água.\n- Pode utilizar a água ofensivamente e defensivamente.\n- Pode disparar grandes rajadas de água.\n\nVasos especiais\nPode criar vasos com diferentes funções:\n- Função A (Portais): Os vasos podem funcionar como portais conectados entre si.\n- Função B (Disparos de água): Pode disparar rajadas de água através dos vasos.\n- Função C (Criaturas marinhas): Pode invocar exércitos inteiros de criaturas marinhas.\n\nCorpo grotesco\n- Consegue atravessar espaços extremamente pequenos.\n- Pode passar por frestas em paredes.\n- Pode distorcer e contorcer o corpo de maneiras incomuns.\n- Pode modificar rapidamente a própria anatomia para evitar ataques físicos.\n- Pode criar diversos braços pequenos e controlá-los.\n\nForma perfeita\nGyokko pode assumir uma forma perfeita. Nessa forma, seus atributos físicos aumentam consideravelmente. Entretanto, perde aproximadamente 90% de sua capacidade de utilizar a habilidade de distorção corporal e criação de braços adicionais.",
@@ -642,7 +643,7 @@
                 id: "robert",
                 nome: "ROBERT ACCUTRONE",
                 cargo: "Integrante",
-                img: "",
+                img: "imagens/robert.jpg",
                 resumoCurto: "Elegante e sofisticado. Especialista em armas de fogo com controle extremamente refinado das trajetórias dos disparos.",
                 resumoCompleto: "Robert é um dos integrantes da Nova Prospekt.\n\nSua aparência e personalidade transmitem elegância, educação e sofisticação.\n\nEle lembra muito mais um senhor americano aposentado de uma família tradicional de negócios do que um integrante de uma organização criminosa.\n\nSeu estilo de combate é baseado em armas de fogo e controle extremamente refinado das trajetórias dos disparos.",
                 poderes: "Criação de pistolas\n- Pode criar dois pares de pistolas.\n- Suas armas possuem capacidade de disparo extremamente elevada.\n\nDisparos especiais\n- Seus projéteis são muito mais rápidos que disparos convencionais.\n- Pode controlar a trajetória dos projéteis.\n- Pode fazer os disparos realizarem curvas.\n- Pode fazer os projéteis ricochetearem.\n- Pode determinar quando e onde os projéteis mudarão de direção.\n\nExplosões\n- Seus projéteis podem explodir.\n- Pode utilizar disparos explosivos em conjunto com o controle de trajetória.\n\nSua principal característica é a precisão e o domínio refinado de uma habilidade aparentemente simples.",
@@ -652,7 +653,7 @@
                 id: "8bit",
                 nome: "8-BIT",
                 cargo: "Suporte Estratégico",
-                img: "",
+                img: "imagens/8bit.jpg",
                 resumoCurto: "Tímido e reservado. Sua principal contribuição é criar uma dimensão digital dentro de si mesmo para servir de base móvel.",
                 resumoCompleto: "8-Bit é um integrante da Nova Prospekt.\n\nÉ tímido e costuma agir principalmente quando recebe ordens ou quando é influenciado por outros integrantes.\n\nPossui uma personalidade mais reservada.\n\nApesar disso, sua utilidade dentro da organização é extremamente elevada.\n\nSua principal contribuição é a capacidade de criar uma dimensão digital particular dentro de si mesmo.\n\nEssa dimensão pode funcionar como residência, esconderijo e base móvel para os integrantes da organização.\n\nEle é extremamente leal à Nova Prospekt.",
                 poderes: "Disparos de energia\n- Pode disparar rajadas de energia.\n\nMaterialização digital\nPode criar objetos, armas e elementos digitais a partir de si mesmo. Exemplos de materializações:\n- Espadas, Mario, Pac-Man, Granada de gelo do Free Fire, Kratos, Carros de GTA, Flauta de Zelda, Gravity Gun de Half-Life, Portais de Minecraft.\nImportante: as materializações não possuem necessariamente todas as capacidades originais de seus equivalentes. Seus atributos e funcionalidades são limitados pelas capacidades do próprio poder de 8-Bit.\n\nDimensão digital\n- Pode criar uma dimensão digital inteiramente controlável dentro de si mesmo.\n- Pode permitir que outros integrantes entrem nessa dimensão.\n- Pode utilizar o espaço como esconderijo.\n- Pode utilizar a dimensão como residência.\n- Pode utilizar a dimensão como quartel-general móvel.\n\nEssa habilidade faz dele um suporte estratégico extremamente importante para a organização.",
