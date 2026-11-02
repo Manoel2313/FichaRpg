@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA PROSPEKT - Arquivo Confidencial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= VARIÁVEIS E RESET ================= */
+        :root {
+            --bg-color: #050505;
+            --panel-bg: #110a0b;
+            --primary-red: #8b0000;
+            --bright-red: #d31027;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --border-color: #331111;
+            --font-title: 'Cinzel', serif;
+            --font-text: 'Rajdhani', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= UTILITÁRIOS E ANIMAÇÕES ================= */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span { color: var(--bright-red); }
+
+        nav button {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-family: var(--font-text);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0.5rem 1rem;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--text-main);
+            border-bottom: 2px solid var(--bright-red);
+        }
+
+        /* ================= HOME PAGE ================= */
+        #home-page {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex: 1;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 5rem;
+            letter-spacing: 10px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(211, 16, 39, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            border: 1px solid var(--bright-red);
+            padding: 1rem 3rem;
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: var(--bright-red);
+            box-shadow: 0 0 20px rgba(211, 16, 39, 0.6);
+        }
+
+        /* ================= CARDS (GRID) ================= */
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .section-title span {
+            font-family: var(--font-text);
+            color: var(--bright-red);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            cursor: pointer;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid transparent;
+            transition: 0.4s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            border: 1px solid var(--bright-red);
+            box-shadow: inset 0 0 20px rgba(211, 16, 39, 0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 350px;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-img::after {
+            content: 'IMG PENDENTE';
+            position: absolute;
+            color: rgba(255,255,255,0.1);
+            font-family: var(--font-title);
+            letter-spacing: 3px;
+            font-size: 1.5rem;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-cargo {
+            color: var(--bright-red);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-nome {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .card:hover .card-btn {
+            background: var(--primary-red);
+            border-color: var(--bright-red);
+        }
+
+        /* ================= PÁGINA INDIVIDUAL (FICHA) ================= */
+        #character-page {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+            width: 100%;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { color: var(--bright-red); }
+
+        .ficha-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .ficha-header h1 {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            line-height: 1;
+        }
+
+        .ficha-cargo {
+            color: var(--bright-red);
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .ficha-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+        }
+
+        .ficha-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .ficha-img-box {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: #0a0a0a;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ficha-img-box::after {
+            content: 'FOTO DE PERFIL PENDENTE';
+            position: absolute;
+            color: rgba(255,255,255,0.1);
+            font-family: var(--font-title);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .ficha-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .ficha-resumo-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--bright-red);
+            padding: 1.5rem;
+        }
+        
+        .ficha-resumo-box h3 {
+            font-family: var(--font-title);
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .ficha-resumo-box p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            white-space: pre-wrap; 
+        }
+
+        .ficha-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .ficha-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+        }
+
+        .ficha-section h2 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--bright-red);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .ficha-conteudo {
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 1.1rem;
+            white-space: pre-wrap; 
+        }
+
+        /* ================= FOOTER (CRÉDITOS) ================= */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 5%;
+            text-align: center;
+            background: rgba(5, 5, 5, 0.9);
+            margin-top: auto;
+        }
+
+        .credits {
+            font-family: var(--font-title);
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .credits span {
+            color: var(--bright-red);
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(211, 16, 39, 0.3);
+        }
+
+        /* ================= RESPONSIVIDADE ================= */
+        @media (max-width: 900px) {
+            .ficha-layout {
+                grid-template-columns: 1fr;
+            }
+            .ficha-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .ficha-header h1 {
+                font-size: 2.5rem;
+            }
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo" onclick="voltarParaHome()">
+            NOVA <span>PROSPEKT</span>
+        </div>
+        <nav>
+            <button onclick="voltarParaHome()">Arquivos</button>
+            <button onclick="scrollToIntegrantes()">Integrantes</button>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main style="flex: 1; display: flex; flex-direction: column;">
+        
+        <!-- TELA INICIAL / LISTA DE INTEGRANTES -->
+        <section id="home-page" class="fade-in">
+            <div class="hero">
+                <h1>NOVA PROSPEKT</h1>
+                <p>Arquivo confidencial da organização. Acesso restrito a membros autorizados. O descumprimento das diretrizes resultará em eliminação imediata.</p>
+                <button class="btn-primary" onclick="scrollToIntegrantes()">Acessar Dossiês</button>
+            </div>
+
+            <div id="integrantes-section">
+                <div class="section-title">
+                    INTEGRANTES CONFIRMADOS
+                    <span>Total: 11</span>
+                </div>
+                <div class="grid-cards" id="cards-container">
+                    <!-- Os cards serão inseridos via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA INDIVIDUAL DO PERSONAGEM -->
+        <section id="character-page" class="hidden">
+            <button class="back-btn" onclick="voltarParaHome()">
+                &larr; Retornar aos Arquivos
+            </button>
+
+            <div class="ficha-header">
+                <h1 id="ficha-nome">NOME</h1>
+                <div class="ficha-cargo" id="ficha-cargo">CARGO</div>
+            </div>
+
+            <div class="ficha-layout">
+                <!-- Coluna Esquerda -->
+                <div class="ficha-sidebar">
+                    <div class="ficha-img-box" id="ficha-img-container">
+                        <!-- Imagem via JS -->
+                    </div>
+                    <div class="ficha-resumo-box">
+                        <h3>RESUMO DO PERSONAGEM</h3>
+                        <p id="ficha-resumo">Resumo...</p>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita -->
+                <div class="ficha-main">
+                    <div class="ficha-section">
+                        <h2>PODERES</h2>
+                        <div class="ficha-conteudo" id="ficha-poderes">Poderes...</div>
+                    </div>
+
+                    <div class="ficha-section">
+                        <h2>FRAQUEZAS</h2>
+                        <div class="ficha-conteudo" id="ficha-fraquezas">Fraquezas...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="credits">
+            Site criado por <span>MERUEM</span>
+        </div>
+    </footer>
+
+    <!-- SCRIPT COM OS DADOS E LÓGICA -->
+    <script>
+        // ==========================================
+        // BANCO DE DADOS DOS PERSONAGENS (JSON)
+        // Para adicionar imagens, coloque o link no campo "img"
+        // ==========================================
+        const personagens = [
+            {
+                id: "suguro",
+                nome: "SUGURO",
+                cargo: "Líder da Nova Prospekt",
+                img: "", 
+                resumoCurto: "Líder da organização. A manifestação completa da união de Dante (corpo), Zenon (mente) e Vanica (alma).",
+                resumoCompleto: "Suguro é o líder da Nova Prospekt.\n\nSua verdadeira origem está relacionada à união de três entidades independentes: Dante, Zenon e Vanica.\n\nOriginalmente, os três representavam partes de uma única existência:\n- Dante: corpo.\n- Zenon: mente.\n- Vanica: alma.\n\nQuando unidos, formam Suguro, a manifestação completa dessa existência.\n\nSua aparência é baseada em Yhwach, mas seu nome é Suguro.\n\nSuguro representa a união das três entidades e mantém as características e capacidades delas.",
+                poderes: "Suguro possui as capacidades das três entidades reunidas:\n\nDante — Corpo\n- Manipulação muscular.\n- Capacidade de modificar e controlar os próprios músculos de maneira explosiva.\n- Manipulação da gravidade.\n- Regeneração extremamente elevada.\n- Grande capacidade destrutiva e ofensiva.\n\nZenon — Mente\n- Criação, controle e manipulação de ossos.\n- Criação de portais de diferentes formatos.\n- Utilização dos portais para movimentação e estratégias de combate.\n- Capacidade de utilizar os portais de maneira extremamente precisa e perigosa.\n- Estilo de combate pragmático e voltado para eliminar ameaças rapidamente.\n\nVanica — Alma\n- Manipulação e controle de sangue.\n- Criação de pactos e restrições.\n- Pode oferecer grandes aumentos de poder em troca de expectativa de vida.\n- Pode realizar trocas equivalentes envolvendo diferentes condições e sacrifícios.\n\nCapacidade compartilhada\n- Os três possuem regeneração.\n- Os três possuem manipulação das trevas.\n\nForma unificada\nSuguro reúne todas essas capacidades em uma única existência. Além disso, na configuração em que utiliza Susano como receptáculo, incorpora também sua poderosa manipulação das trevas.",
+                fraquezas: "1. Conflito interno entre as três consciências.\n2. Sobrecarga ao utilizar várias habilidades poderosas simultaneamente.\n3. Confiança excessiva.\n4. Dependência de Susano como receptáculo para sua forma unificada."
+            },
+            {
+                id: "dante",
+                nome: "DANTE",
+                cargo: "Entidade - O Corpo",
+                img: "",
+                resumoCurto: "Uma das três entidades originais. Representa o corpo da existência que, unida a Zenon e Vanica, forma Suguro.",
+                resumoCompleto: "Dante é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEle representa o corpo da existência original.\n\nSua natureza está intrinsecamente ligada à força física, resistência e capacidades destrutivas. Dante é parte fundamental da manifestação completa que é Suguro.",
+                poderes: "Manipulação muscular\n- Capacidade de modificar e controlar os próprios músculos de maneira explosiva.\n\nManipulação da gravidade\n- Controle sobre a gravidade ao seu redor.\n\nRegeneração extremamente elevada\n- Capacidade de regeneração muito superior ao normal.\n\nGrande capacidade destrutiva e ofensiva\n- Poder de combate focado em dano bruto e destruição.",
+                fraquezas: "1. Excesso de confiança: não costuma considerar seus adversários ameaças reais.\n2. Comportamento brincalhão: enxerga batalhas como um esporte e prefere se divertir em vez de lutar seriamente.\n3. Descuido em combate: frequentemente deixa oportunidades de ataque e defesa passarem por não levar a situação a sério.\n4. Inferioridade estratégica: pode ser colocado em desvantagem contra alguém com poder equivalente e capacidade mental superior."
+            },
+            {
+                id: "zenon",
+                nome: "ZENON",
+                cargo: "Entidade - A Mente",
+                img: "",
+                resumoCurto: "Uma das três entidades originais. Representa a mente da existência que, unida a Dante e Vanica, forma Suguro.",
+                resumoCompleto: "Zenon é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEle representa a mente da existência original.\n\nSua natureza está ligada ao controle, estratégia e capacidades de manipulação precisa. Zenon é parte fundamental da manifestação completa que é Suguro.",
+                poderes: "Criação, controle e manipulação de ossos\n- Capacidade de criar e controlar ossos.\n\nCriação de portais\n- Criação de portais de diferentes formatos.\n\nUtilização dos portais\n- Movimentação e estratégias de combate.\n- Uso extremamente preciso e perigoso.\n\nEstilo de combate\n- Pragmático e voltado para eliminar ameaças rapidamente.",
+                fraquezas: "1. Dependência de confrontos rápidos: prefere encerrar batalhas o mais rápido possível.\n2. Dificuldade em confrontos prolongados: adversários resistentes que não caem facilmente podem desgastar sua postura.\n3. Perda de controle: conforme uma luta se prolonga e seus planos falham, pode começar a perder o controle da situação.\n4. Menor resistência física: sua força e resistência são inferiores às de Dante e Vanica."
+            },
+            {
+                id: "vanica",
+                nome: "VANICA",
+                cargo: "Entidade - A Alma",
+                img: "",
+                resumoCurto: "Uma das três entidades originais. Representa a alma da existência que, unida a Dante e Zenon, forma Suguro.",
+                resumoCompleto: "Vanica é uma das três entidades independentes que, quando unidas, formam Suguro.\n\nEla representa a alma da existência original.\n\nSua natureza está ligada ao sacrifício, pactos e manipulação de energia vital. Vanica é parte fundamental da manifestação completa que é Suguro.",
+                poderes: "Manipulação e controle de sangue\n- Capacidade de manipular e controlar sangue.\n\nCriação de pactos e restrições\n- Pode criar pactos e restrições.\n\nAumento de poder\n- Pode oferecer grandes aumentos de poder em troca de expectativa de vida.\n\nTrocas equivalentes\n- Pode realizar trocas equivalentes envolvendo diferentes condições e sacrifícios.",
+                fraquezas: "1. Psicopatia e sadismo: suas emoções e seu prazer em causar sofrimento frequentemente interferem em suas decisões.\n2. Desprezo pelos adversários: considera praticamente todos inferiores e indignos de respeito.\n3. Impulsividade emocional: pode tomar decisões precipitadas por diversão, raiva ou excitação.\n4. Negação do perigo: mesmo diante de alguém capaz de tirar sua vida, recusa-se a reconhecer que está em perigo e não leva a própria sobrevivência a sério."
+            },
+            {
+                id: "david",
+                nome: "DAVID MARTÍNEZ",
+                cargo: "Vice-líder da Nova Prospekt",
+                img: "",
+                resumoCurto: "Vice-líder. Seu corpo é uma plataforma tecnológica de combate composta por nanotecnologia e biotecnologia extremamente avançadas.",
+                resumoCompleto: "David é o vice-líder da Nova Prospekt.\n\nSeu corpo é composto por nanotecnologia e biotecnologia extremamente avançadas.\n\nCada célula de seu corpo possui componentes cibernéticos, criando uma estrutura que mistura perfeitamente características humanas e mecânicas.\n\nApesar de sua natureza artificial, seu corpo pode apresentar uma aparência completamente humana.\n\nEle funciona como uma verdadeira plataforma tecnológica de combate.",
+                poderes: "Corpo nanotecnológico\n- Pode modificar a própria estrutura corporal.\n- Pode criar camadas metálicas.\n- Pode modificar órgãos e membros.\n- Pode transformar partes do corpo em armamentos.\n- Pode criar lâminas, canhões e outras estruturas ofensivas.\n\nSandevistan\n- Possui um sistema cibernético instalado na coluna.\n- Permite realizar explosões de velocidade durante curtos períodos.\n- O uso provoca grande desgaste físico.\n- Pode utilizar o Sandevistan por um turno e precisa aguardar quatro turnos para permitir a recuperação adequada do corpo.\n\nArsenal tecnológico\nPode produzir equipamentos e armamentos através do próprio corpo, incluindo:\n- Granadas.\n- Pistolas.\n- Drones.\n- Torres automáticas.\n- Metralhadoras.\n- Outros equipamentos tecnológicos.\n\nHackeamento\n- Consegue invadir e manipular dispositivos tecnológicos com relativa facilidade.",
+                fraquezas: "1. Limitação de uso do Sandevistan: 1 turno a cada 4 turnos.\n2. Sobrecarga tecnológica.\n3. Danos estruturais no corpo cibernético.\n4. Interferências ou falhas nos sistemas."
+            },
+            {
+                id: "skar",
+                nome: "SKAR",
+                cargo: "Monarca das Feras (Selado)",
+                img: "",
+                resumoCurto: "Irmão mais velho de Jack. Um dos integrantes originais. Atualmente selado, mas seus poderes são temidos até pelo trio.",
+                resumoCompleto: "Skar é o irmão mais velho de Jack e um dos integrantes originais da Nova Prospekt.\n\nEle possui uma mentalidade muito superior à de seu irmão e transmite uma autoridade impressionante.\n\nSua presença é tão imponente que até mesmo Dante, Zenon e Vanica questionam se ele realmente está abaixo deles.\n\nSkar é conhecido como o Monarca das Feras.\n\nAtualmente está selado.\n\nAntes de ser selado, pediu educadamente a Dante que entregasse temporariamente sua posição na organização a seu irmão mais novo, Jack.\n\nAssim, Jack ocupa seu posto enquanto Skar permanece selado.\n\nSkar está entre os personagens mais poderosos da organização, ficando abaixo apenas do trio.",
+                poderes: "1. Bestialidade\nSkar pode assumir a forma de qualquer besta que consiga imaginar. Não existe uma restrição a uma única espécie de criatura. Exemplos: Mamute, Tiranossauro Rex, Kraken, Cérbero, Dragão, Lobo de três cabeças, Urso de gelo.\nPode utilizar três modalidades:\n- Transformação completa: Pode transformar todo o corpo em uma única besta.\n- Transformação híbrida: Pode misturar características de várias bestas simultaneamente. Exemplo: 40% mamute, 20% Cérbero, 30% urso de gelo, 10% Kraken.\n- Transformação parcial: Pode transformar somente partes específicas do corpo. Exemplos: Criar asas de dragão, blindagem de rinoceronte, ferrão de escorpião.\n\n2. Manipulação do fogo\nSkar pode criar, controlar e manipular fogo. Embora seja um poder aparentemente simples, seu domínio é extremamente elevado. Sua habilidade com fogo é comparável ao domínio que Susano possui sobre as trevas.\n\n3. Garras\nSkar pode produzir cortes em formato de garras. O diferencial é que sua capacidade de corte aumenta exponencialmente conforme sua sede de sangue cresce. Se a sede diminui, o corte também diminui. O poder pode começar relativamente fraco e alcançar níveis extremamente elevados conforme o combate se desenvolve.",
+                fraquezas: "1. Instinto de caça.\n2. Nunca recua de um combate.\n3. Transformações especializadas.\n4. A força dos cortes depende da intensidade de sua sede de sangue."
+            },
+            {
+                id: "jack",
+                nome: "JACK",
+                cargo: "Substituto Temporário",
+                img: "",
+                resumoCurto: "Irmão mais novo de Skar. Ocupa o posto temporariamente. Poderoso e perigoso, mas com capacidade intelectual muito baixa.",
+                resumoCompleto: "Jack é o irmão mais novo de Skar.\n\nEle ocupa uma posição na Nova Prospekt porque seu irmão mais velho, antes de ser selado, pediu educadamente a Dante que entregasse temporariamente seu posto a Jack.\n\nJack não conquistou originalmente aquela posição por ser o candidato mais adequado. Ele está ali porque Skar pediu.\n\nSua personalidade é muito diferente da de seu irmão. Jack possui uma capacidade intelectual e uma mentalidade muito inferiores às de Skar.\n\nÉ extremamente perigoso e poderoso, mas também pode representar um problema para a própria organização. Mesmo quando recebe explicações detalhadas, pode acabar comprometendo uma missão por não compreender adequadamente a situação.",
+                poderes: "Força física\n- Possui atributos físicos extremamente elevados.\n- Sua força e resistência são superiores às de praticamente qualquer adversário convencional.\n- É extremamente resistente.\n\nTransformação em mamute\n- Pode assumir a forma de um mamute de aproximadamente 15 metros.\n- Sua força física aumenta consideravelmente.\n- Sua resistência também é ampliada.\n- Seu tamanho e sua lentidão tornam sua movimentação ainda menos eficiente.",
+                fraquezas: "1. Inteligência limitada.\n2. Baixa velocidade.\n3. Grande porte.\n4. Impulsividade."
+            },
+            {
+                id: "quilge",
+                nome: "QUILGE OPIE",
+                cargo: "Integrante",
+                img: "",
+                resumoCurto: "Indivíduo cruel e psicopático. Combina manipulação de veneno com a criação e controle de fios de energia.",
+                resumoCompleto: "Quilge é um dos integrantes da Nova Prospekt.\n\nÉ um indivíduo extremamente cruel e psicopático.\n\nSua personalidade é marcada pela ausência de culpa ou remorso. Ele é capaz de realizar atrocidades sem demonstrar qualquer arrependimento.\n\nSeu poder combina manipulação de veneno com a criação e controle de fios de energia.",
+                poderes: "Manipulação de veneno\n- Pode criar, controlar e manipular venenos.\n- Pode utilizar diferentes aplicações de veneno.\n\nFios de energia\nPode criar fios compostos de energia. Os fios possuem duas modalidades:\n- Invisíveis: mais fracos, mas difíceis de perceber.\n- Visíveis: mais resistentes e poderosos.\n\nPode utilizar os fios para:\n- Criar milhares de lâminas.\n- Construir jaulas.\n- Criar barreiras.\n- Construir estruturas.\n- Criar criaturas.\n- Prender adversários.\n- Formar grandes conjuntos de fios interligados.\n\nRegeneração dos fios\nOs fios podem ser destruídos, mas possuem a capacidade de se regenerar completamente em poucos segundos.\n\nCombinação com veneno\nO veneno pode percorrer os fios, permitindo combinar ataques e armadilhas.",
+                fraquezas: "1. Necessidade de concentração para controlar muitos fios.\n2. Produzir grandes quantidades de veneno exige mais esforço.\n3. Fios invisíveis são mais frágeis.\n4. Fios destruídos ficam temporariamente indisponíveis durante a regeneração."
+            },
+            {
+                id: "gyokko",
+                nome: "GYOKKO",
+                cargo: "Integrante",
+                img: "",
+                resumoCurto: "Anatomia grotesca e flexível. Poder baseado na manipulação de água e vasos especiais com portais e invocações.",
+                resumoCompleto: "Gyokko é um dos integrantes da Nova Prospekt.\n\nSeu poder é baseado na criação e manipulação de grandes quantidades de água, além da utilização de vasos especiais com diferentes funções.\n\nPossui uma anatomia grotesca e extremamente flexível.",
+                poderes: "Manipulação da água\n- Pode criar, controlar e manipular grandes quantidades de água.\n- Pode utilizar a água ofensivamente e defensivamente.\n- Pode disparar grandes rajadas de água.\n\nVasos especiais\nPode criar vasos com diferentes funções:\n- Função A (Portais): Os vasos podem funcionar como portais conectados entre si.\n- Função B (Disparos de água): Pode disparar rajadas de água através dos vasos.\n- Função C (Criaturas marinhas): Pode invocar exércitos inteiros de criaturas marinhas.\n\nCorpo grotesco\n- Consegue atravessar espaços extremamente pequenos.\n- Pode passar por frestas em paredes.\n- Pode distorcer e contorcer o corpo de maneiras incomuns.\n- Pode modificar rapidamente a própria anatomia para evitar ataques físicos.\n- Pode criar diversos braços pequenos e controlá-los.\n\nForma perfeita\nGyokko pode assumir uma forma perfeita. Nessa forma, seus atributos físicos aumentam consideravelmente. Entretanto, perde aproximadamente 90% de sua capacidade de utilizar a habilidade de distorção corporal e criação de braços adicionais.",
+                fraquezas: "1. Seus vasos podem ser destruídos.\n2. Ambientes com pouca água limitam algumas aplicações dos poderes.\n3. Forma perfeita reduz em 90% sua capacidade de distorção corporal e criação de membros adicionais.\n4. Excesso de confiança."
+            },
+            {
+                id: "robert",
+                nome: "ROBERT ACCUTRONE",
+                cargo: "Integrante",
+                img: "",
+                resumoCurto: "Elegante e sofisticado. Especialista em armas de fogo com controle extremamente refinado das trajetórias dos disparos.",
+                resumoCompleto: "Robert é um dos integrantes da Nova Prospekt.\n\nSua aparência e personalidade transmitem elegância, educação e sofisticação.\n\nEle lembra muito mais um senhor americano aposentado de uma família tradicional de negócios do que um integrante de uma organização criminosa.\n\nSeu estilo de combate é baseado em armas de fogo e controle extremamente refinado das trajetórias dos disparos.",
+                poderes: "Criação de pistolas\n- Pode criar dois pares de pistolas.\n- Suas armas possuem capacidade de disparo extremamente elevada.\n\nDisparos especiais\n- Seus projéteis são muito mais rápidos que disparos convencionais.\n- Pode controlar a trajetória dos projéteis.\n- Pode fazer os disparos realizarem curvas.\n- Pode fazer os projéteis ricochetearem.\n- Pode determinar quando e onde os projéteis mudarão de direção.\n\nExplosões\n- Seus projéteis podem explodir.\n- Pode utilizar disparos explosivos em conjunto com o controle de trajetória.\n\nSua principal característica é a precisão e o domínio refinado de uma habilidade aparentemente simples.",
+                fraquezas: "1. Munição limitada, especialmente em disparos mais complexos.\n2. Necessidade de concentração para controlar diversos projéteis.\n3. Dificuldade contra adversários que conseguem se aproximar rapidamente.\n4. Resistência física inferior à de combatentes especializados em durabilidade."
+            },
+            {
+                id: "8bit",
+                nome: "8-BIT",
+                cargo: "Suporte Estratégico",
+                img: "",
+                resumoCurto: "Tímido e reservado. Sua principal contribuição é criar uma dimensão digital dentro de si mesmo para servir de base móvel.",
+                resumoCompleto: "8-Bit é um integrante da Nova Prospekt.\n\nÉ tímido e costuma agir principalmente quando recebe ordens ou quando é influenciado por outros integrantes.\n\nPossui uma personalidade mais reservada.\n\nApesar disso, sua utilidade dentro da organização é extremamente elevada.\n\nSua principal contribuição é a capacidade de criar uma dimensão digital particular dentro de si mesmo.\n\nEssa dimensão pode funcionar como residência, esconderijo e base móvel para os integrantes da organização.\n\nEle é extremamente leal à Nova Prospekt.",
+                poderes: "Disparos de energia\n- Pode disparar rajadas de energia.\n\nMaterialização digital\nPode criar objetos, armas e elementos digitais a partir de si mesmo. Exemplos de materializações:\n- Espadas, Mario, Pac-Man, Granada de gelo do Free Fire, Kratos, Carros de GTA, Flauta de Zelda, Gravity Gun de Half-Life, Portais de Minecraft.\nImportante: as materializações não possuem necessariamente todas as capacidades originais de seus equivalentes. Seus atributos e funcionalidades são limitados pelas capacidades do próprio poder de 8-Bit.\n\nDimensão digital\n- Pode criar uma dimensão digital inteiramente controlável dentro de si mesmo.\n- Pode permitir que outros integrantes entrem nessa dimensão.\n- Pode utilizar o espaço como esconderijo.\n- Pode utilizar a dimensão como residência.\n- Pode utilizar a dimensão como quartel-general móvel.\n\nEssa habilidade faz dele um suporte estratégico extremamente importante para a organização.",
+                fraquezas: "1. Materializações possuem capacidades limitadas em relação aos originais.\n2. Suas criações digitais podem ser destruídas.\n3. Adversários podem estudar e compreender seus padrões.\n4. Personalidade reservada e dificuldade para tomar decisões independentes sob pressão."
+            }
+        ];
+
+        // ==========================================
+        // LÓGICA DE NAVEGAÇÃO E RENDERIZAÇÃO
+        // ==========================================
+
+        const homePage = document.getElementById('home-page');
+        const charPage = document.getElementById('character-page');
+        const cardsContainer = document.getElementById('cards-container');
+
+        // 1. Renderizar os Cards na tela inicial
+        function renderizarCards() {
+            cardsContainer.innerHTML = ''; 
+            
+            personagens.forEach(p => {
+                const imgHtml = p.img ? `<img src="${p.img}" alt="${p.nome}">` : '';
+                
+                const cardHTML = `
+                    <div class="card" onclick="abrirFicha('${p.id}')">
+                        <div class="card-img">
+                            ${imgHtml}
+                        </div>
+                        <div class="card-content">
+                            <div class="card-cargo">${p.cargo}</div>
+                            <div class="card-nome">${p.nome}</div>
+                            <div class="card-desc">${p.resumoCurto}</div>
+                            <button class="card-btn">Abrir Dossiê</button>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.innerHTML += cardHTML;
+            });
+        }
+
+        // 2. Abrir Ficha Individual
+        function abrirFicha(id) {
+            const personagem = personagens.find(p => p.id === id);
+            if (!personagem) return;
+
+            document.getElementById('ficha-nome').innerText = personagem.nome;
+            document.getElementById('ficha-cargo').innerText = personagem.cargo;
+            document.getElementById('ficha-resumo').innerText = personagem.resumoCompleto;
+            document.getElementById('ficha-poderes').innerText = personagem.poderes;
+            document.getElementById('ficha-fraquezas').innerText = personagem.fraquezas;
+
+            const imgContainer = document.getElementById('ficha-img-container');
+            if (personagem.img) {
+                imgContainer.innerHTML = `<img src="${personagem.img}" alt="${personagem.nome}">`;
+            } else {
+                imgContainer.innerHTML = ''; 
+            }
+
+            homePage.classList.add('hidden');
+            charPage.classList.remove('hidden');
+            charPage.classList.remove('fade-in');
+            
+            void charPage.offsetWidth; 
+            charPage.classList.add('fade-in');
+            
+            window.scrollTo(0, 0);
+        }
+
+        // 3. Voltar para a Home
+        function voltarParaHome() {
+            charPage.classList.add('hidden');
+            homePage.classList.remove('hidden');
+            homePage.classList.remove('fade-in');
+            
+            void homePage.offsetWidth;
+            homePage.classList.add('fade-in');
+            
+            window.scrollTo(0, 0);
+        }
+
+        // 4. Rolar suavemente para a seção de integrantes
+        function scrollToIntegrantes() {
+            if (!homePage.classList.contains('hidden')) {
+                document.getElementById('integrantes-section').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                voltarParaHome();
+                setTimeout(() => {
+                    document.getElementById('integrantes-section').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+
+        // Inicializar
+        renderizarCards();
+    </script>
+</body>
+</html>
